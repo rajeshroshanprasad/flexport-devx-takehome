@@ -3,30 +3,29 @@ on:
   push:
     branches: ["*"]
 
-env:
-  SETUP_PYTHON_VERSION: '3.8'
-  NODE_VERSION: '16.x'
-
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '16.x'
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.SETUP_PYTHON_VERSION }}
-          node-version: ${{ env.NODE_VERSION }}
+          python-version: '3.8'
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          npm install -g black
       - name: Check formatting
         run: black --check .
       - name: Lint code
         run: pylint src/*
-      - name: Lint tests
+      - name: Lint code
         run: pylint tests/*
       - name: Run tests
         run: pytest --cov=src tests/
