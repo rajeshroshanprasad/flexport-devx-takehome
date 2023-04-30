@@ -41,7 +41,7 @@ def health():
 @app.route("/rps", methods=["POST"])
 def rps():
     """
-    Play rock-paper-scissors game. 
+    Play rock-paper-scissors game.
     """
     # Create number to choice mapping
     mapping = ["Rock", "Paper", "Scissors"]
