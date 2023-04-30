@@ -26,5 +26,4 @@ def rock_paper_scissors(user_choice: int) -> int:
         return 0, pc_choice
     if (user_choice + 1) % 3 == pc_choice % 3:
         return -1, pc_choice
-    else:
-        return 1, pc_choice
+    return 1, pc_choice
